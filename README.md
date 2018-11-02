@@ -22,6 +22,7 @@ jar349/minecraft-in-docker:1.13.2
 ```
 
 The list of environment variables that you may pass to the run command:
+
 | Variable    | Default | Purpose |
 | --------    | ------- | ------- |
 | EULA        | n/a     | true or false - do you accept the EULA? |
