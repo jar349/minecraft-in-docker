@@ -9,9 +9,9 @@ view-distance=10
 max-build-height=256
 server-ip=
 level-seed=${SEED}
-gamemode=0
+gamemode=${GAMEMODE:-0}
 server-port=${SERVER_PORT:-25565}
-enable-command-block=false
+enable-command-block=${ENABLE_COMMAND_BLOCKS:-false}
 allow-nether=true
 enable-rcon=false
 op-permission-level=4
@@ -35,7 +35,7 @@ network-compression-threshold=256
 level-type=DEFAULT
 spawn-monsters=true
 max-tick-time=60000
-enforce-whitelist=false
+enforce-whitelist=${ENFORCE_WHITELIST:-false}
 use-native-transport=true
 max-players=20
 resource-pack-sha1=
@@ -50,4 +50,23 @@ cat <<EOF >> eula.txt
 eula=$EULA
 EOF
 
-java -Xmx${JAVA_XMX:-1024M} -Xms${JAVA_XMS:-1024M} -jar server.jar nogui
+cat <<EOF >> /etc/nginx/sites-available/minecraft
+server {
+    listen ${API_PORT:-25566};
+
+    proxy_read_timeout 240s;
+    
+    error_log /tmp/minecraft-nginx-error.log warn;
+    access_log /tmp/minecraft-nginx-access.log combined;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:///tmp/minecraft.sock;
+    }
+}
+EOF
+
+ln -s /etc/nginx/sites-available/minecraft /etc/nginx/sites-enabled
+
+uwsgi --ini wrapper-uwsgi.ini
+nginx -g 'daemon off;'
