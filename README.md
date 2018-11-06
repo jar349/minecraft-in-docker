@@ -30,7 +30,7 @@ docker run -d \
 -e "ENABLE_COMMAND_BLOCKS=true" \
 -p "25565:25565" \
 -p "25566:25566" \
---restart always \
+--restart unless-stopped \
 jar349/minecraft-in-docker:1.13.2
 ```
 
