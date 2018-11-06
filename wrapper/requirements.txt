@@ -16,7 +16,7 @@ loginpass==0.1.1
 MarkupSafe==1.0
 oauth2==1.9.0.post1
 pycparser==2.18
-requests==2.19.1
+requests==2.20.0
 six==1.11.0
 urllib3==1.23
 Werkzeug==0.14.1
