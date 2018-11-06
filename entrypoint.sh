@@ -54,12 +54,14 @@ cat <<EOF >> /etc/nginx/sites-available/minecraft
 server {
     listen ${API_PORT:-25566};
 
-    proxy_read_timeout 240s;
-    
     error_log /tmp/minecraft-nginx-error.log warn;
     access_log /tmp/minecraft-nginx-access.log combined;
 
+    proxy_read_timeout 240;
+    
     location / {
+        uwsgi_read_timeout 240s;
+        uwsgi_send_timeout 240s;
         include uwsgi_params;
         uwsgi_pass unix:///tmp/minecraft.sock;
     }

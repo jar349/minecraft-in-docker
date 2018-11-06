@@ -16,6 +16,7 @@ class ServerThread(threading.Thread):
         self.server_process = None
 
     def run(self):
+        print('About to call Popen in ServerThread.run')
         self.server_process = Popen(
             self.start_command,
             cwd=self.working_directory,

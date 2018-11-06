@@ -17,14 +17,14 @@ def teleport(request):
 
 @current_app.route('/start', methods=['GET'])
 def start():
-    current_app.logger.info('Received request to start minecraft')
+    print('Received request to start minecraft')
     minecraft_server.start()
 
 @current_app.route('/stop', methods=['GET'])
 def stop():
-    current_app.logger.info('Received request to stop minecraft')
+    print('Received request to stop minecraft')
     minecraft_server.stop()
     # we know we're in a docker container that is running nginx as a proxy for uwsgi and we want everything to stop -
     # not just flask, so call out to nginx and send a stop signal.  uwsgi should die too because die-onterm is true
     Popen(["nginx", "-s", "stop"], start_new_session=true)
-    current_app.logger.info('The server is stopped')
+    print('The server is stopped')
