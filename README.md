@@ -38,8 +38,8 @@ The list of environment variables that you may pass to the run command:
 
 | Variable    | Default | Purpose |
 | --------    | ------- | ------- |
-| EULA        | n/a     | true or false - do you accept the EULA? |
-| SEED        | Empty   | The minecraft world generation seed |
+| EULA        |         | true or false - do you accept the EULA? |
+| SEED        |         | The minecraft world generation seed |
 | SERVER_PORT | 25565   | The port on which minecraft accepts connections |
 | API_PORT    | 25566   | The port on which the REST API accepts connections |
 | WHITE_LIST  | false   | true or false - whether to use a whitelist for access to the server |
