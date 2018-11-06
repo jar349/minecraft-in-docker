@@ -22,7 +22,8 @@ class ServerThread(threading.Thread):
             cwd=self.working_directory,
             stdout=PIPE,
             stdin=PIPE,
-            stderr=STDOUT
+            stderr=STDOUT,
+            universal_newlines=True
         )
 
     def is_running(self):

@@ -1,14 +1,15 @@
 FROM azul/zulu-openjdk:10
 
 ARG SERVER_JAR_URL
+ARG DEBUG
 
 RUN apt update && \
     apt install -y curl python3 python3-pip nginx && \
     pip3 install uwsgi && \
     mkdir -p /usr/local/minecraft && \
-    chown -r www-data:www-data /usr/local/minecraft && \
     curl -o /usr/local/minecraft/server.jar $SERVER_JAR_URL
 
+RUN if [ \( "$DEBUG" != "" -a "$DEBUG" = "true" \) ]; then apt install -y net-tools less vim; fi
 COPY /wrapper/requirements.txt /usr/local/minecraft/
 RUN pip3 install -r /usr/local/minecraft/requirements.txt
 

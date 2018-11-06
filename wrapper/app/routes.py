@@ -1,9 +1,11 @@
 from subprocess import Popen
-from flask import current_app
+from flask import Blueprint, Response
 from app import minecraft_server
 
 
-@current_app.route('/teleport', methods=['POST'])
+bp = Blueprint('routes', __name__, url_prefix='/')
+
+@bp.route('/teleport', methods=['POST'])
 def teleport(request):
 
     if not request:
@@ -15,12 +17,13 @@ def teleport(request):
 
         minecraft_server.teleport_player_to_player(player_to_be_moved, destination_player)
 
-@current_app.route('/start', methods=['GET'])
+@bp.route('/start', methods=['GET'])
 def start():
     print('Received request to start minecraft')
     minecraft_server.start()
+    return Response("server started", status=200, mimetype='text/plain')
 
-@current_app.route('/stop', methods=['GET'])
+@bp.route('/stop', methods=['GET'])
 def stop():
     print('Received request to stop minecraft')
     minecraft_server.stop()
@@ -28,3 +31,4 @@ def stop():
     # not just flask, so call out to nginx and send a stop signal.  uwsgi should die too because die-onterm is true
     Popen(["nginx", "-s", "stop"], start_new_session=true)
     print('The server is stopped')
+    return Response("server stopped", status=200, mimetype='text/plain')

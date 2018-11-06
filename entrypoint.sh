@@ -70,5 +70,6 @@ EOF
 
 ln -s /etc/nginx/sites-available/minecraft /etc/nginx/sites-enabled
 
+chown -R www-data:www-data /usr/local/minecraft
 uwsgi --ini wrapper-uwsgi.ini
 nginx -g 'daemon off;'
