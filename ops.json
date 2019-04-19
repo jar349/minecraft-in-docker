@@ -1,0 +1,20 @@
+[
+  {
+    "uuid": "7636a99c-ca9e-47c7-a7a2-30c18595f655",
+    "name": "bacondoublechz",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "70a98b4c-f3e8-4009-9aa6-67cc1a6d436e",
+    "name": "jar349",
+    "level": 4,
+    "bypassesPlayerLimit": true
+  },
+  {
+    "uuid": "d061e2c9-8434-4171-98bc-6c385cb96471",
+    "name": "ferabeth",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  }
+]
